@@ -1,6 +1,7 @@
-package AngieJones.AngieBase;
+package FormsBase;
 
 import BaseCLASS.BasePage;
+import Forms_Tasks_Developed.FormsPAge;
 import OrangeHRM.HomePage;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -17,13 +18,15 @@ import java.io.File;
 import java.io.IOException;
 
 import static BaseCLASS.BasePage.delay;
+import static Utility.Utality.SetUtilityDriver;
 
-public class BasetestANJIE {
-    private String url="https://the-internet.herokuapp.com/";
+public class fromsBASEEE {
+    private String url = "https://formy-project.herokuapp.com/form";
     private WebDriver driver;
-    public HomePage homePage;
+    public HomePage homePage1;
     public BasePage basePage;
-
+    public fromsBASEEE formBase;
+    public FormsPAge formpage11;
 
 
     @BeforeClass
@@ -38,18 +41,25 @@ public class BasetestANJIE {
         driver.get(url);
         basePage = new BasePage();
         basePage.setDriver(driver);
-       // setUtilityDriver();
-        //will be initialze soon
-        homePage = new HomePage();
+        formBase = new fromsBASEEE();
+        SetUtilityDriver();
+        homePage1 = new HomePage();
+        formpage11 = new FormsPAge();
     }
 
     @AfterMethod
     public void takeFailedResultScreenshot(ITestResult testResult) {
+        String folderPath = System.getProperty("user.dir") + "\\screenshot";
         if (ITestResult.FAILURE == testResult.getStatus()) {
+
             TakesScreenshot screenshot = (TakesScreenshot) driver;
             File source = screenshot.getScreenshotAs(OutputType.FILE);
+            File directory = new File(folderPath);
+            if (!directory.exists()) {
+                directory.mkdirs(); // create all missing folders
+            }
             File destination = new File(System.getProperty("user.dir") +
-                    "/screenshot/screenshots/(" +
+                    "/screenshot/(" +
                     java.time.LocalDate.now() + ") " +
                     testResult.getName() + ".png");
             try {
@@ -63,7 +73,8 @@ public class BasetestANJIE {
 
     @AfterClass
     public void tearDown() {
-        delay(3000);
+        //delay(3000);
         driver.quit();
     }
+
 }

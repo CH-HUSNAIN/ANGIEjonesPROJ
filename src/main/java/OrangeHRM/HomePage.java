@@ -8,6 +8,8 @@ public class HomePage extends BasePage {
 
     private By login=By.xpath("//a[normalize-space()='Form Authentication']");
     private By text=By.xpath("//h2[normalize-space()='Secure Area']");
+    //this is xpath for forms
+    private By forms=By.xpath("");
      public LoginPage GOTOlogin(){
          click(login);
 
